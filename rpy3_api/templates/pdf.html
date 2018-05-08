@@ -1,0 +1,80 @@
+{%extends 'base.html' %}
+{% block body%}
+
+<div class="row page-intro">
+	<div class="col-lg-12">
+		<h1>PDF Miner
+		</h1>
+	</div>
+</div>
+
+<div class="row">
+  <form class="form-inline", id='test_form' method = "POST" 
+  enctype = "multipart/form-data">
+      {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.fileName(size=30) }}
+    </div>
+    <button type="submit" class="btn btn-primary">Upload</button>
+  </form>
+            
+</div>
+{% if message %}
+<hr>
+<p color="red">Error: {{message}}</p>
+{% endif %}
+
+
+{% if data %}
+<hr>
+
+<div class="container">
+    <h2>PDF Parshing</h2>
+    <h3>1. Box Text</h3>         
+    <table class="table table-hover">
+        <thead>
+            <tr>
+              <th>Index</th>
+              <th>text</th>
+              <th>Index No</th>
+              <th>width</th>
+              <th>height</th>
+              <th>x0</th>
+              <th>x0</th>
+              <th>x1</th>
+              <th>y1</th>
+            </tr>
+          </thead>
+        <tbody>
+          {% for keys, values in data.items() %}
+          <tr>
+          <td>{{keys}}</td>
+          <td class="col-md-3">{{data[keys]['text']}}</td>
+          {%for i in [ 'index', 'width','height', 'x0', 'x0', 'x1','y1']%}
+          <td>{{'{0:0.2f}'.format(data[keys][i])}}</td>
+          {% endfor %}
+           
+          </tr>
+          {% endfor %}
+          
+      </tbody></table>
+
+      <h3>2. Raw data </h3>         
+    <table class="table table-hover">
+        <tbody>
+          <tr>
+          <td class="col-md-3">Box text</td>
+          <td>{{dict(data)}}</td>
+           </tr>
+           <tr>
+              <td class="col-md-3">Line Text</td>
+              <td>{{dict(text)}}</td>
+               </tr>
+          
+      </tbody></table>
+  </div>
+
+{% endif %}
+<hr>
+<p><small><i> Api under development. <br> Example Url:<br> curl -d http://bkrmdahal.pythonanywhere.com</i> </small></p>
+{% endblock %}

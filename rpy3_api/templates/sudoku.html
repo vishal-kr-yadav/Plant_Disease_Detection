@@ -1,0 +1,83 @@
+{%extends 'base.html' %}
+{% block body%}
+<div class="row page-intro">
+	<div class="col-lg-12">
+		<h1>Solve Sudoku
+		</h1>
+	</div>
+</div>
+
+<div class="row">
+        <small>Send sudoku as string, replace empty space by .(dot) and move from left to right. </small>
+        <form class="form-inline", id='test_form' method="POST" >
+                {{ form.hidden_tag() }}
+              <div class="form-group">
+                  {{ form.text(size=130, class="form-control" , placeholder="Type your text here... E.g 2...3..4...6..") }}
+              </div>
+              <button type="submit" class="btn btn-primary">Slove</button>
+            </form>
+            
+</div>
+{% if message %}
+<hr>
+<p color="red">Error: {{message}}</p>
+{% endif %}
+{% if data %}
+
+<div class="container">
+        <style>
+                table { border-collapse: collapse; font-family: Calibri, sans-serif; }
+                colgroup, tbody { border: solid medium; }
+                td { border: solid thin; height: 1.4em; width: 1.4em; text-align: center; padding: 0; }
+                </style>
+    <table class="sudoku", align="center">
+            <caption align="center">Sudoku solution</caption>
+            <colgroup><col><col><col>
+            <colgroup><col><col><col>
+            <colgroup><col><col><col>
+                {% for n in range(0,9,3) %}
+            <tbody>
+                {% for row in data[n:n+3] %}
+             <tr >
+                 {% for i in row %}
+                 <td> {{i}} </td>
+                 {% endfor %}
+                 </tr>
+                 {% endfor %}
+                <tbody>
+                {% endfor %}
+          </table>
+  </div>
+{% endif %}
+<hr>
+{% if i_data %}
+
+<div class="container">
+    <table class="sudoku", align="center">
+        <style>
+            table { border-collapse: collapse; font-family: Calibri, sans-serif; }
+            colgroup, tbody { border: solid medium; }
+            td { border: solid thin; height: 1.4em; width: 1.4em; text-align: center; padding: 0; }
+            </style>
+            <caption align="center">Sudoku</caption>
+            <colgroup><col><col><col>
+            <colgroup><col><col><col>
+            <colgroup><col><col><col>
+                {% for n in range(0,9,3) %}
+            <tbody>
+                {% for row in i_data[n:n+3] %}
+             <tr >
+                 {% for i in row %}
+                 <td> {{'' if i=='.' else i}} </td>
+                 {% endfor %}
+                 </tr>
+                 {% endfor %}
+                <tbody>
+                {% endfor %}
+          </table>
+  </div>
+{% endif %}
+<p><small><i> You can also use the api at '/v1/api/sudoku' with payload 'data'. <br> Example Url:<br> curl -d data="2.....34..." http://bkrmdahal.pythonanywhere.com/v1/api/sudoku -X POST</i> </small></p>
+
+        <!-- /.row -->
+{% endblock %}

@@ -1,0 +1,46 @@
+{%extends 'base.html' %}
+{% block body%}
+
+<div class="row page-intro">
+	<div class="col-lg-12">
+		<h1>Rpy3
+			<small>Fun begins</small>
+		</h1>
+		<p>Each project has API and web interface.</p>
+	</div>
+</div>
+
+<div class="row">
+            <article class="col-md-4 article-intro">
+                <a href="/text_api">
+                    <img class="img-responsive img-rounded" src="{{url_for('static', filename='image/nlp.jpg')}}" alt="nlp" height="300" width="700"> 
+                </a>
+                <h3>
+                    <a href="/text_api">Text API</a>
+                </h3>
+                <p>Find part-of-speech tagging, noun phrase extraction, sentiment analysis, classification, translation, and more of any sentence. You can also use API at /v1/api/text with payload "data".</p>
+            </article>
+            <article class="col-md-4 article-intro">
+                    <a href="/sudoku">
+                        <img class="img-responsive img-rounded" src="{{url_for('static', filename='image/sudoku_3.jpg')}}" alt="sudoku" height="300" width="700"> 
+                    </a>
+                    <h3>
+                        <a href="/sudoku">Slove Sudoku</a>
+                    </h3>
+                    <p>Solve any normal sudoku. Replace empty space by .(dot) and move from left to right. Enter all 81 digits and your good to go. E.g for above image its 2.............62....1....7...6..8...3...9...7...6..4...4....8....52.............3</p>
+                </article>
+                <article class="col-md-4 article-intro">
+                    <a href="/pdf">
+                        <img class="img-responsive img-rounded" src="{{url_for('static', filename='image/pdf.png')}}" alt="pdf" > 
+                    </a>
+                    <h3>
+                        <a href="/pdf">Pdf Miner</a>
+                    </h3>
+                    <p>Extract the text from pdf doc with metadata like location, fonts and Textbox size.</p>
+                </article>
+            
+
+            
+        </div>
+        <!-- /.row -->
+{% endblock %}
